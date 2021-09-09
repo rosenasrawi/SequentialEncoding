@@ -20,6 +20,10 @@ def turnPositionsCircle(turnUpperPos, turnLowerPos, thisTurn):
     return turnUpperPos, turnLowerPos
 
 """ Task specifics"""
+hallo
+dsfjkshdf
+]sdfhbjhsdgfjkhdfgv
+
 
 #def determineTaskSpecifics():
 
