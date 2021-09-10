@@ -1,4 +1,5 @@
-#from psychopy import core, event
+""" Import packages"""
+
 import random
 
 """ Import other task scripts """
@@ -26,10 +27,12 @@ for dial in range(len(dialTypesPractice)):
         performanceBlock = []
 
         for trial in range(len(trialTypesPractice)):
-            targetColors, nonTargetColors = determineTrialSpecifics(trialTypesPractice[trial], loadType, targetColors, nonTargetColors)
+            trialType = trialTypesPractice[trial]
+            targetColors, nonTargetColors, targetMoment, targetLocation, targetTilt = determineTrialSpecifics(trialType, loadType, targetColors, nonTargetColors)
             presentStim()
+            
             clockwise, count = presentResponse(loadType, dialType, practice, targetColors)
-            performance = presentTrialFeedback(count, clockwise, dialType)
+            reportOri, targetOri, difference, performance = presentTrialFeedback(count, clockwise, dialType)
 
             performanceBlock.append(performance)
 

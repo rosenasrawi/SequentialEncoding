@@ -137,7 +137,7 @@ def determineTrialSpecifics(trial, load, targetColors, nonTargetColors):
             leftBar2.ori = random.randint(oriRangeLeft[0],oriRangeLeft[1]) 
             rightBar2.ori = random.randint(oriRangeRight[0],oriRangeRight[1])    
 
-    return targetColors, nonTargetColors
+    return targetColors, nonTargetColors, targetMoment, targetLocation, targetTilt
 
 """ Practice dial """
 
@@ -230,8 +230,10 @@ def presentStim():
 
     fixCross.lineColor = fixColor   
     fixCross.setAutoDraw(True)
+
+    thisFixTime = random.randint(fixTime[0], fixTime[1])
     
-    for i in range(random.randint(fixTime[0], fixTime[1])):             # Fixation
+    for i in range(thisFixTime):             # Fixation
         mywin.flip()
     
     leftBar1.setAutoDraw(True)
@@ -258,6 +260,7 @@ def presentStim():
     for i in range(delayTime):            # Memory delay
         mywin.flip()
 
+    return thisFixTime
 """ Present response dial """
 
 def presentResponse(load, dial, practice, targetColors):
@@ -344,6 +347,9 @@ def presentTrialFeedback(count, clockwise, dial):
 
     if dial == 1: # start point 90* higher
         reportOri += 90
+    
+    # Target color
+    targetCol = fixCross.lineColor
 
     # Determine the target orientation
     if (fixCross.lineColor == leftBar1.fillColor).all():
@@ -377,12 +383,11 @@ def presentTrialFeedback(count, clockwise, dial):
     fixCross.setAutoDraw(False)
     feedbackText.setAutoDraw(False)  
 
-    return performance      
+    return reportOri, targetOri, difference, performance    
 
 def presentBlockFeedback(performanceBlock):
     performanceBlock = round(mean(performanceBlock))
     blockFeedbackPerformanceText.text = str(performanceBlock) + "% correct"
-    
     blockFeedbackText.draw()
     blockFeedbackPerformanceText.draw()
     space2continue.draw()

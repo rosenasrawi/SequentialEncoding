@@ -1,10 +1,15 @@
 """ Import packages"""
 
-#from psychopy import core, event
 import random
 
 """ Import other task scripts """
 
+from pp_info_logfile import *
+
+session, subjectID = getInfo()
+filename, header = createNewDatafile(session, subjectID)
+
+from task_objects import *
 from task_functions import *
 
 """ Run Task """
@@ -28,35 +33,53 @@ for dial in range(len(dialTypesTask)):
         performanceBlock = []
 
         for trial in range(len(trialTypesTask)):
-            targetColors, nonTargetColors = determineTrialSpecifics(trialTypesTask[trial], loadType, targetColors, nonTargetColors)
-            presentStim()
+            trialType = trialTypesTask[trial]
+
+            # Trial presentation
+            targetColors, nonTargetColors, targetMoment, targetLocation, targetTilt = determineTrialSpecifics(trialType, loadType, targetColors, nonTargetColors)
+            thisFixTime = presentStim()
             clockwise, count = presentResponse(loadType, dialType, practice, targetColors)
 
-            performance = presentTrialFeedback(count, clockwise, dialType)
+            reportOri, targetOri, difference, performance = presentTrialFeedback(count, clockwise, dialType)
             performanceBlock.append(performance)
 
-        presentBlockFeedback(performanceBlock) # show block feedback      
+            if load == 0: #load one
+                colCued1 = targetColors; colCued2 = []
+            elif load == 1:
+                colCued1 = targetColors[0]; colCued2 = targetColors[1]
 
-""" Run task """
+            # Adding data to logfile
+            trialData = {'Left bar ori 1':      leftBar1.ori,                 
+                         'Right bar ori 1':     rightBar1.ori,
+                         'Left bar col 1':      leftBar1.lineColor, 
+                         'Right bar col 1':     rightBar1.lineColor,
+                         'Left bar ori 2':      leftBar2.ori,                 
+                         'Right bar ori 2':     rightBar2.ori,
+                         'Left bar col 2':      leftBar2.lineColor, 
+                         'Right bar col 2':     rightBar2.lineColor,
+                         'Col cued 1':          colCued1, 
+                         'Col cued 2':          colCued2,                     # only if load 2
+                         'Col probed':          colCued1,
+                         'Target moment':       targetMoment,
+                         'Target location':     targetLocation,
+                         'Target tilt':         targetTilt,
+                         'Ask degree':          targetOri,
+                         'Rep degree':          reportOri,
+                         'Circle steps':        count, 
+                         'Clockwise':           clockwise,
+                         'Difference':          difference, 
+                         'Fixation time':       thisFixTime, 
+         #                'Dial start moment',
+         #                'Response start moment', 
+         #                'Response end moment', 
+         #                'Response time', 
+         #                'Response duration',
+                         'Performance':         performance, 
+                         'Dial type':           dialType, 
+                         'Load type':           loadType, 
+                         'Trial type':          trialType,
+                         'Task type':           session}
 
-#random.shuffle(blockTypes)
+            addTrialToData(filename, header, trialData) 
 
-#for block in range(len(loads)):
-
-#    blockType = blockTypes[block]
-
-#    dial = dials[blockType]
-#    presentPrecueDial(dial, targetColors = [])
-    
-#    load = loads[blockType]
-#    targetColors, nonTargetColors = determineBlockSpecifics(load)
-#    presentPrecueLoad(targetColors,load)
-
-#    practice = False
-    
-#    for trial in range(len(trialTypes)):
-#        targetColors, nonTargetColors = determineTrialSpecifics(trial, load, targetColors, nonTargetColors)
-
-#        presentStim()
-#        clockwise, count = presentResponse(load, dial, practice, targetColors)
-#        presentTrialFeedback(count, clockwise, dial)
+        presentBlockFeedback(performanceBlock) # show block feedback
