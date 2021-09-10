@@ -7,10 +7,15 @@ from math import pi, atan2, degrees
 setting = 'laptop'
 
 if setting == 'laptop':
+    # Monitor
     monitorHZ = 60
-    height = 25; distance = 60; vertResolution = 1536 
+    height = 22; distance = 50; vertResolution = 1536 
+
+    # Directories
+    dataDirectory = '/Users/rosenasrawi/Documents/VU PhD/Projects/rn3 - Sequential encoding/Data/Try-out'
 
 elif setting == 'lab':
+    # Monitor
     monitorHZ = 140
     height = 35; distance = 90; vertResolution = 1920 
 
@@ -22,6 +27,7 @@ fixSize = int(0.2/deg_per_px); LineWidth = int(0.05/deg_per_px)
 
 circleRadius = int(1.5/deg_per_px)
 miniCircleRadius = int(0.15/deg_per_px)
+circleEdges = int(1/deg_per_px)
 
 # Degrees and ranges
 maxTurn = 200/(200/monitorHZ)
@@ -68,10 +74,20 @@ targetMoments    = [0,0,0,0,1,1,1,1]
 targetLocations  = [0,0,1,1,0,0,1,1]
 targetTilts      = [0,1,0,1,0,1,0,1]
 
-# Trials per block
+# Trialstypes
 trialTypes = [0,1,2,3,4,5,6,7]
 
+# Practice blocks
+dialTypesPractice   = [0,1]
+loadTypesPractice   = [0,1] # per dial type 
+trialTypesPractice  = trialTypes * 2 # per load
+
+# Task blocks
+dialTypesTask   = [0,1,0,1,0,1]
+loadTypesTask   = [0,1] # per dial type 
+trialTypesTask  = trialTypes * 4 # per load
+
 # Blocktypes
-loads = [0,1,0,1] # load one
-dials = [0,0,1,1]
-blockTypes = [0,1,2,3]
+#loads = [0,1,0,1] # load one
+#dials = [0,0,1,1]
+#blockTypes = [0,1,2,3]
