@@ -2,6 +2,7 @@
 
 from psychopy import core, event
 from math import degrees, cos, sin
+from statistics import mean
 import random
 
 """ Import other task scripts """
@@ -19,13 +20,6 @@ def turnPositionsCircle(turnUpperPos, turnLowerPos, thisTurn):
     
     return turnUpperPos, turnLowerPos
 
-""" Task specifics"""
-hallo
-dsfjkshdf
-]sdfhbjhsdgfjkhdfgv
-
-
-#def determineTaskSpecifics():
 
 """ Block specifics"""
 
@@ -42,18 +36,18 @@ def determineBlockSpecifics(load):
         nonTargetColors.remove(targetColors[0])     # The other two are non-targets
         nonTargetColors.remove(targetColors[1])
     
-    random.shuffle(trialTypes)                      # Trialtypes shuffled for each block
+    #random.shuffle(trialTypes)                      # Trialtypes shuffled for each block
     return targetColors, nonTargetColors
 
 """ Trial specifics"""
 
 def determineTrialSpecifics(trial, load, targetColors, nonTargetColors):
 
-    trialType = trialTypes[trial]                   # What are the specs of this trial
+    #trialType = trialTypes[trial]                   # What are the specs of this trial
 
-    targetMoment = targetMoments[trialType]
-    targetLocation = targetLocations[trialType]
-    targetTilt = targetTilts[trialType]
+    targetMoment = targetMoments[trial]
+    targetLocation = targetLocations[trial]
+    targetTilt = targetTilts[trial]
 
     random.shuffle(nonTargetColors)                 # non-target colors randomised
     
@@ -381,4 +375,17 @@ def presentTrialFeedback(count, clockwise, dial):
         mywin.flip()
 
     fixCross.setAutoDraw(False)
-    feedbackText.setAutoDraw(False)        
+    feedbackText.setAutoDraw(False)  
+
+    return performance      
+
+def presentBlockFeedback(performanceBlock):
+    performanceBlock = round(mean(performanceBlock))
+    blockFeedbackPerformanceText.text = str(performanceBlock) + "% correct"
+    
+    blockFeedbackText.draw()
+    blockFeedbackPerformanceText.draw()
+    space2continue.draw()
+
+    mywin.flip()
+    event.waitKeys(keyList = 'space')    

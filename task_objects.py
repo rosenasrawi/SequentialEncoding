@@ -140,3 +140,19 @@ feedbackText = visual.TextStim(
     color = fontColor,
     pos = [0,2*fixSize],
     height = fontSizeFeedback)
+
+blockFeedbackText = visual.TextStim(
+    win = mywin, 
+    font = textFont,
+    text = 'Average performance this block:',
+    color = fontColor,
+    pos = [0,barSize[1]],
+    height = fontSizePreCue)
+
+blockFeedbackPerformanceText = visual.TextStim(
+    win = mywin, 
+    font = textFont,
+    text = '',
+    color = fontColor,
+    pos = [0,0],
+    height = fontSizePreCue)

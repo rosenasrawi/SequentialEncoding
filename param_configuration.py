@@ -68,10 +68,20 @@ targetMoments    = [0,0,0,0,1,1,1,1]
 targetLocations  = [0,0,1,1,0,0,1,1]
 targetTilts      = [0,1,0,1,0,1,0,1]
 
-# Trials per block
+# Trialstypes
 trialTypes = [0,1,2,3,4,5,6,7]
 
+# Practice blocks
+dialTypesPractice   = [0,1]
+loadTypesPractice   = [0,1] # per dial type 
+trialTypesPractice  = trialTypes * 2 # per load
+
+# Task blocks
+dialTypesTask   = [0,1,0,1,0,1]
+loadTypesTask   = [0,1] # per dial type 
+trialTypesTask  = trialTypes * 4 # per load
+
 # Blocktypes
-loads = [0,1,0,1] # load one
-dials = [0,0,1,1]
-blockTypes = [0,1,2,3]
+#loads = [0,1,0,1] # load one
+#dials = [0,0,1,1]
+#blockTypes = [0,1,2,3]
