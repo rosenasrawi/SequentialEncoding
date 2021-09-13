@@ -12,6 +12,7 @@ from param_configuration import *
 mywin = visual.Window(
     color = backgroundColor,
     monitor = "testMonitor", 
+    size = monitorSize,
     units = "pix",
     fullscr = True)
 
@@ -86,6 +87,28 @@ turnLower = visual.Circle(
     fillColor = backgroundColor,
     lineColor = fixColor)
 
+""" Eye-tracking calibration """
+
+eyecalibrationCircle = visual.Circle(
+    win = mywin,
+    radius = miniCircleRadius,
+    edges = circleEdges,
+    lineWidth = LineWidth,
+    lineColor = fixColor,
+    fillColor = fixColor
+    #pos = determined later
+)
+
+eyecalibrationCircleMini = visual.Circle(
+    win = mywin,
+    radius = miniCircleRadius/3,
+    edges = circleEdges,
+    lineWidth = LineWidth,
+    lineColor = eyeCalibMini,
+    fillColor = eyeCalibMini
+    #pos = determined later
+)
+
 """ Text """
 
 precueTextColor = visual.TextStim(
@@ -128,7 +151,23 @@ precueTextDial = visual.TextStim(
 space2continue = visual.TextStim(
     win = mywin, 
     font = textFont,
-    text = "Press [space] to continue",
+    text = "Press [space] if you're ready to continue",
+    color = fontColor,
+    pos = [0,-barSize[1]],
+    height = fontSizePreCue)
+
+practiceDialText = visual.TextStim(
+    win = mywin, 
+    font = textFont,
+    text = "Practice turning the response dial",
+    color = fontColor,
+    pos = [0,barSize[1]],
+    height = fontSizePreCue)
+
+practiceDialButtons = visual.TextStim(
+    win = mywin, 
+    font = textFont,
+    text = "Press and hold: \n \n [Z] to turn counterclockwise \n [M] to turn clockwise",
     color = fontColor,
     pos = [0,-barSize[1]],
     height = fontSizePreCue)
@@ -144,7 +183,7 @@ feedbackText = visual.TextStim(
 blockFeedbackText = visual.TextStim(
     win = mywin, 
     font = textFont,
-    text = 'Average performance this block:',
+    text = '',
     color = fontColor,
     pos = [0,barSize[1]],
     height = fontSizePreCue)
@@ -153,6 +192,14 @@ blockFeedbackPerformanceText = visual.TextStim(
     win = mywin, 
     font = textFont,
     text = '',
+    color = fontColor,
+    pos = [0,0],
+    height = fontSizePreCue)
+
+eyecalibrationText = visual.TextStim(
+    win = mywin, 
+    font = textFont,
+    text = 'Please follow the dot',
     color = fontColor,
     pos = [0,0],
     height = fontSizePreCue)

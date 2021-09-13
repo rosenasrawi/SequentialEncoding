@@ -39,16 +39,20 @@ def createNewDatafile(session, subjectID):
                   'Clockwise',
                   'Difference', 
                   'Fixation time', 
-#                  'Dial start moment',
-#                  'Response start moment', 
-#                  'Response end moment', 
-#                  'Response time', 
-#                  'Response duration',
+                  'Probe start time',
+                  'Press start time', 
+                  'Release start time', 
+                  'Decision time', 
+                  'Response duration',
                   'Performance',
                   'Dial type', 
                   'Load type', 
                   'Trial type',
-                  'Task type']
+                  'Task type',
+                  'Trigger encoding 1',
+                  'Trigger encoding 2',
+                  'Trigger probe',
+                  'Trigger response']
 
         writer = csv.DictWriter(datafile, delimiter = ',', fieldnames = header)
         writer.writeheader()

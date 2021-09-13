@@ -3,7 +3,7 @@
 from psychopy import core, event
 from math import degrees, cos, sin
 from statistics import mean
-import random
+import random, time
 
 """ Import other task scripts """
 
@@ -141,9 +141,17 @@ def determineTrialSpecifics(trial, load, targetColors, nonTargetColors):
 
 """ Practice dial """
 
-def presentPracticeDial(dial, ori, targetColors):
-    practice = True
-    load = None
+def presentPracticeDial(dial, ori, targetColors, trial):
+
+    practiceBar.setAutoDraw(True)
+    practiceDialText.setAutoDraw(True)
+    practiceDialButtons.setAutoDraw(True)
+
+    if trial > 0: # Only instructions during the first trial
+        practiceDialText.setAutoDraw(False)
+        practiceDialButtons.setAutoDraw(False)
+
+    loadPractice = None
 
     fixCross.lineColor = fixColor
     practiceBar.fillColor = fixCross.lineColor
@@ -155,17 +163,17 @@ def presentPracticeDial(dial, ori, targetColors):
     elif ori == 1:
         practiceBar.ori = random.randint(oriRangeRight[0], oriRangeRight[1])
 
-    presentResponse(load, dial, practice, targetColors)
+    presentResponse(loadPractice, dial, targetColors)
 
 """ Pre-cue dial """
 
-def presentPrecueDial(dial, targetColors):
+def presentPrecueDial(dialType, targetColors):
 
     # Dial cue
-    if dial == 0: # upper
+    if dialType == 0: # upper
         turnUpper.pos = upper_turnUpper
         turnLower.pos = upper_turnLower
-    elif dial == 1: # right
+    elif dialType == 1: # right
         turnUpper.pos = right_turnUpper
         turnLower.pos = right_turnLower     
 
@@ -182,16 +190,14 @@ def presentPrecueDial(dial, targetColors):
     event.waitKeys(keyList = 'space')
 
     # Run practice
-    
-    load = None
     oris = [0,1,0,1]
 
     for trial in range(len(oris)):
         ori = oris[trial]
-
-        presentPracticeDial(dial, ori, targetColors)
+        presentPracticeDial(dialType, ori, targetColors, trial)
 
     practiceBar.setAutoDraw(False)
+    practiceDialText.setAutoDraw(False)
 
 """ Pre-cue color """
 
@@ -224,9 +230,53 @@ def presentPrecueLoad(targetColors, load):
     mywin.flip()
     event.waitKeys(keyList = 'space')
 
+""" Eye-tracker calibration """
+
+def eyetrackingCalibration(triggerSend, portBioSemi = None, tracker = None):
+
+    eyecalibrationText.setAutoDraw(True)
+
+    for i in range(delayTime): # 1750 ms
+        mywin.flip()
+
+    eyecalibrationText.setAutoDraw(False)
+
+    eyecalibrationCircle.setAutoDraw(True)
+    eyecalibrationCircleMini.setAutoDraw(True)
+
+    posOrder = list(range(len(allPositions)))
+    random.shuffle(posOrder)
+
+    for pos in posOrder:
+        eyecalibrationCircle.pos = list(allPositions[pos])
+        eyecalibrationCircleMini.pos = list(allPositions[pos])
+
+        if triggerSend == True:
+            triggerCalib = calibrationTriggers[pos]
+            mywin.callOnFlip(portBioSemi.setData, triggerCalib)
+            mywin.callOnFlip(tracker.send_message, 'trig' + str(triggerCalib))
+
+        for i in range(calibrationTime): # 1500 ms
+            mywin.flip()
+            if triggerSend == True:
+                if i == 2:
+                    portBioSemi.setData(resetTrigger)
+
+    eyecalibrationCircle.setAutoDraw(False)
+    eyecalibrationCircleMini.setAutoDraw(False)    
+
 """ Present main stimuli """
 
-def presentStim():
+def presentStim(triggerSend, trialType, loadType, dialType, portBioSemi = None, tracker = None):
+
+    if loadType == 0: loadAdd = 0
+    elif loadType == 1: loadAdd = 50
+
+    if dialType == 0: dialAdd = 0
+    elif dialType == 1: dialAdd = 100
+
+    triggerEnc1 = trialType + loadAdd + dialAdd + 0
+    triggerEnc2 = trialType + loadAdd + dialAdd + 10
 
     fixCross.lineColor = fixColor   
     fixCross.setAutoDraw(True)
@@ -239,14 +289,25 @@ def presentStim():
     leftBar1.setAutoDraw(True)
     rightBar1.setAutoDraw(True)
 
+    if triggerSend == True:
+        mywin.callOnFlip(portBioSemi.setData, triggerEnc1)
+        mywin.callOnFlip(tracker.send_message, 'trig' + str(triggerEnc1))
+
     for i in range(encodingTime):             # First encoding display
         mywin.flip()
+        if triggerSend == True:
+            if i == 2: # turn off EEG trigger after 2 frames
+                portBioSemi.setData(resetTrigger)
 
     leftBar1.setAutoDraw(False)
     rightBar1.setAutoDraw(False)
 
     for i in range(betweenTime):             # Fixation
         mywin.flip()
+
+    if triggerSend == True:
+        mywin.callOnFlip(portBioSemi.setData, triggerEnc2)
+        mywin.callOnFlip(tracker.send_message, 'trig' + str(triggerEnc2))
 
     leftBar2.setAutoDraw(True)
     rightBar2.setAutoDraw(True)
@@ -260,10 +321,24 @@ def presentStim():
     for i in range(delayTime):            # Memory delay
         mywin.flip()
 
-    return thisFixTime
+    return thisFixTime, triggerEnc1, triggerEnc2
+
 """ Present response dial """
 
-def presentResponse(load, dial, practice, targetColors):
+def presentResponse(loadType, dialType, targetColors, trialType = 0, portBioSemi = [], tracker = []):
+
+    if loadType == 0: loadAdd = 0
+    elif loadType == 1: loadAdd = 50
+    else: loadAdd = 0
+
+    if dialType == 0: dialAdd = 0
+    elif dialType == 1: dialAdd = 100
+
+    triggerProbe = trialType + loadAdd + dialAdd + 20
+
+    if triggerSend == True:
+        mywin.callOnFlip(portBioSemi.setData, triggerProbe)
+        mywin.callOnFlip(tracker.send_message, 'trig' + str(triggerProbe))
 
     kb.clearEvents()
 
@@ -272,15 +347,15 @@ def presentResponse(load, dial, practice, targetColors):
     key_release = []
     key_press = []
 
-    if load == 0: # load 1
+    if loadType == 0: # load 1
         fixCross.lineColor = targetColors
-    elif load == 1: # load 2
+    elif loadType == 1: # load 2
         fixCross.lineColor = targetColors[0]        # 0 was the target
     
-    if dial == 0: # upper
+    if dialType == 0: # upper
         turnUpper.pos = upper_turnUpper             # Dial circles in the correct position
         turnLower.pos = upper_turnLower
-    elif dial == 1: # right
+    elif dialType == 1: # right
         turnUpper.pos = right_turnUpper
         turnLower.pos = right_turnLower        
 
@@ -289,14 +364,26 @@ def presentResponse(load, dial, practice, targetColors):
     turnLower.setAutoDraw(True) 
     turnUpper.setAutoDraw(True) 
 
-    if practice == True:
-        practiceBar.setAutoDraw(True)
+    probeTime = time.time()
 
     mywin.flip()
+    if triggerSend == True:
+        core.wait(2/monitorHZ) # two frames, 0.008 s
+        portBioSemi.setData(resetTrigger) # turn off probe trigger
+
     key_press = event.waitKeys(keyList = ['z', 'm', 'q', 'escape'])     # Wait for a keypress
 
     if 'z' in key_press:
+        pressTime = time.time()
         clockwise = False
+
+        triggerResponse = trialType + loadAdd + dialAdd + 30
+        if triggerSend == True:
+            portBioSemi.setData(triggerResponse) #count 1
+            tracker.send_message('trig' + str(triggerResponse))
+            core.wait(2/monitorHZ) # two frames, 0.008 s
+            portBioSemi.setData(resetTrigger) # turn off probe trigger
+
         while key_release == [] and count < maxTurn:
             
             key_release = kb.getKeys(keyList = ['z'], waitRelease = True, clear = True)
@@ -310,7 +397,16 @@ def presentResponse(load, dial, practice, targetColors):
             mywin.flip()
 
     elif 'm' in key_press:
+        pressTime = time.time()
         clockwise = True
+
+        triggerResponse = trialType + loadAdd + dialAdd + 40
+        if triggerSend == True:
+            portBioSemi.setData(triggerResponse) #count 1
+            tracker.send_message('trig' + str(triggerResponse))
+            core.wait(2/monitorHZ) # two frames, 0.008 s
+            portBioSemi.setData(resetTrigger) # turn off probe trigger
+
         while key_release == [] and count < maxTurn:
 
             key_release = kb.getKeys(keyList = ['m'], waitRelease = True, clear = True)
@@ -323,8 +419,10 @@ def presentResponse(load, dial, practice, targetColors):
             mywin.flip()
 
     elif 'q' in key_press:
+        pressTime = time.time()
         core.quit()
         
+    releaseTime = time.time()
     key_press = []
     key_release = []
 
@@ -333,7 +431,7 @@ def presentResponse(load, dial, practice, targetColors):
     turnUpper.setAutoDraw(False)
     fixCross.setAutoDraw(False)
 
-    return clockwise, count
+    return clockwise, count, probeTime, pressTime, releaseTime, triggerProbe, triggerResponse
 
 """ Practice trial feedback """
 
@@ -348,9 +446,6 @@ def presentTrialFeedback(count, clockwise, dial):
     if dial == 1: # start point 90* higher
         reportOri += 90
     
-    # Target color
-    targetCol = fixCross.lineColor
-
     # Determine the target orientation
     if (fixCross.lineColor == leftBar1.fillColor).all():
         targetOri = leftBar1.ori
@@ -383,11 +478,17 @@ def presentTrialFeedback(count, clockwise, dial):
     fixCross.setAutoDraw(False)
     feedbackText.setAutoDraw(False)  
 
-    return reportOri, targetOri, difference, performance    
+    return round(reportOri), targetOri, difference, performance    
 
-def presentBlockFeedback(performanceBlock):
+def presentBlockFeedback(performanceBlock, numBlocks, thisNumBlock):
+
     performanceBlock = round(mean(performanceBlock))
     blockFeedbackPerformanceText.text = str(performanceBlock) + "% correct"
+
+    numBlocks = str(numBlocks)
+    thisNumBlock = str(thisNumBlock)
+
+    blockFeedbackText.text = "Performance this block [" + thisNumBlock + "/" + numBlocks + "]:"
     blockFeedbackText.draw()
     blockFeedbackPerformanceText.draw()
     space2continue.draw()

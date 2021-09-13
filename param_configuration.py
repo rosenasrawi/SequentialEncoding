@@ -1,6 +1,7 @@
 """ Import packages"""
 
 from math import pi, atan2, degrees
+import itertools
 
 """ Configuration script """
 
@@ -9,7 +10,9 @@ setting = 'laptop'
 if setting == 'laptop':
     # Monitor
     monitorHZ = 60
+    monitorSize = [1536,960]
     height = 22; distance = 50; vertResolution = 1536 
+    triggerSend = False
 
     # Directories
     dataDirectory = '/Users/rosenasrawi/Documents/VU PhD/Projects/rn3 - Sequential encoding/Data/Try-out'
@@ -17,7 +20,13 @@ if setting == 'laptop':
 elif setting == 'lab':
     # Monitor
     monitorHZ = 140
+    monitorSize = [1536,960]
     height = 35; distance = 90; vertResolution = 1920 
+    triggerSend = True
+    resetTrigger = 0
+
+    dataDirectory = []
+    eyeDirectory = []
 
 deg_per_px = degrees(atan2(.5*height, distance)) / (.5*vertResolution) # Calculate the number of degrees that correspond to a single pixel
 
@@ -47,18 +56,28 @@ upper_turnLower = [0, -circleRadius]
 right_turnUpper = [circleRadius, 0]
 right_turnLower = [-circleRadius, 0]
 
+# Eye calibration locations
+
+xPositions = [-barSize[1]*2, 0, barSize[1]*2]
+yPositions = [barSize[1], 0, -barSize[1]]
+
+allPositions = list(itertools.product(xPositions, yPositions)) # 9 times x,y coordinates
+calibrationTriggers = [200,201,202,203,204,205,206,207,208]
+
 # Timings
 fixTime = [int(monitorHZ/2), int(monitorHZ*8/10)]   # 500, 800 ms
 encodingTime = int(monitorHZ/4)                     # 250 ms
 betweenTime = int(monitorHZ*0.75)                   # 750 ms
 delayTime = int(monitorHZ*1.75)                     # 1750 ms
 feedbackTime = int(monitorHZ/4)                     # 250 ms
+calibrationTime = int(monitorHZ*1.5)                # 1500
 
 # Colors
 backgroundColor = (50/510,50/510,50/510)                 # A1A1A1 had to change for the eye-tracker
 barColors = ["#C2A025", "#3843C2", "#2FC259", "#CF3C3C"]    # orange, blue, green, purple
 barColorNames = ['YELLOW', 'BLUE', 'GREEN', 'RED']       
 fixColor = (300/510,300/510,300/510)                        # lightgrey
+eyeCalibMini = (1/510, 1/510, 1/510)
 
 # Dials
 dialNames = ["upper", "right"]
@@ -86,6 +105,7 @@ trialTypesPractice  = trialTypes * 2 # per load
 dialTypesTask   = [0,1,0,1,0,1]
 loadTypesTask   = [0,1] # per dial type 
 trialTypesTask  = trialTypes * 4 # per load
+
 
 # Blocktypes
 #loads = [0,1,0,1] # load one
