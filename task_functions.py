@@ -163,7 +163,7 @@ def presentPracticeDial(dial, ori, targetColors, trial):
     elif ori == 1:
         practiceBar.ori = random.randint(oriRangeRight[0], oriRangeRight[1])
 
-    presentResponse(loadPractice, dial, targetColors)
+    presentResponse(loadPractice, dial, targetColors, portBioSemi = None, tracker = None, triggerSend = False)
 
 """ Pre-cue dial """
 
@@ -267,7 +267,7 @@ def eyetrackingCalibration(triggerSend, portBioSemi = None, tracker = None):
 
 """ Present main stimuli """
 
-def presentStim(triggerSend, trialType, loadType, dialType, portBioSemi = None, tracker = None):
+def presentStim(triggerSend, trialType, loadType, dialType, portBioSemi, tracker):
 
     if loadType == 0: loadAdd = 0
     elif loadType == 1: loadAdd = 50
@@ -314,6 +314,9 @@ def presentStim(triggerSend, trialType, loadType, dialType, portBioSemi = None, 
 
     for i in range(encodingTime):             # Second encoding display
         mywin.flip()
+        if triggerSend == True:
+            if i == 2: # turn off EEG trigger after 2 frames
+                portBioSemi.setData(resetTrigger)
 
     leftBar2.setAutoDraw(False)
     rightBar2.setAutoDraw(False)
@@ -325,7 +328,7 @@ def presentStim(triggerSend, trialType, loadType, dialType, portBioSemi = None, 
 
 """ Present response dial """
 
-def presentResponse(loadType, dialType, targetColors, trialType = 0, portBioSemi = [], tracker = []):
+def presentResponse(loadType, dialType, targetColors, portBioSemi, tracker, triggerSend, trialType = 0):
 
     if loadType == 0: loadAdd = 0
     elif loadType == 1: loadAdd = 50

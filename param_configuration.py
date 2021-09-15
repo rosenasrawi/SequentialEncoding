@@ -4,8 +4,7 @@ from math import pi, atan2, degrees
 import itertools
 
 """ Configuration script """
-hello = 6
-setting = 'laptop'
+setting = 'lab'
 
 if setting == 'laptop':
     # Monitor
@@ -21,7 +20,7 @@ elif setting == 'lab':
     # Monitor
     monitorHZ = 239
     monitorSize = [1920,1080]
-    height = 28; distance = 70; vertResolution = 1920 
+    height = 28; distance = 60; vertResolution = 1920 
     triggerSend = True
     resetTrigger = 0
 
@@ -102,12 +101,10 @@ loadTypesPractice   = [0,1] # per dial type
 trialTypesPractice  = trialTypes * 2 # per load
 
 # Task blocks
-dialTypesTask   = [0,1,0,1,0,1]
+#dialTypesTask   = [0,1,0,1,0,1]
+#loadTypesTask   = [0,1] # per dial type 
+#trialTypesTask  = trialTypes * 4 # per load
+
+dialTypesTask   = [0,1]
 loadTypesTask   = [0,1] # per dial type 
-trialTypesTask  = trialTypes * 4 # per load
-
-
-# Blocktypes
-#loads = [0,1,0,1] # load one
-#dials = [0,0,1,1]
-#blockTypes = [0,1,2,3]
+trialTypesTask  = trialTypes # per load

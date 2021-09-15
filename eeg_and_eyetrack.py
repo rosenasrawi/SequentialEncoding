@@ -8,7 +8,7 @@ import os
 def activateEEGandEyeTracker(subjectID, session):
 
     # EEG
-    portBioSemi = parallel.ParallelPort(address = 0x3010)
+    portBioSemi = parallel.ParallelPort(address = 0x3050)
     portBioSemi.setData(resetTrigger)
 
     # Eye-tracker

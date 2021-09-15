@@ -13,11 +13,12 @@ from task_objects import *
 from task_functions import *
 
 """ EEG & Eye-tracker"""
+
 if triggerSend == True:
     from eeg_and_eyetrack import *
     portBioSemi, tracker = activateEEGandEyeTracker(subjectID, session)
     eyeTrackerStart(tracker)
-else:
+elif triggerSend == False:
     portBioSemi = []; tracker = []
 
 """ Run Task """
@@ -31,7 +32,6 @@ for dial in range(len(dialTypesTask)):
 
     dialType = dialTypesTask[dial]
     presentPrecueDial(dialType, targetColors = [])
-
     random.shuffle(loadTypesTask)       # For this dial, random order load one & two
 
     for load in range(len(loadTypesTask)):
@@ -52,7 +52,7 @@ for dial in range(len(dialTypesTask)):
 
             # Stimulus and response
             thisFixTime, triggerEnc1, triggerEnc2 = presentStim(triggerSend, trialType, loadType, dialType, portBioSemi, tracker)
-            clockwise, count, probeTime, pressTime, releaseTime, triggerProbe, triggerResponse = presentResponse(loadType, dialType, targetColors, trialType, portBioSemi, tracker)
+            clockwise, count, probeTime, pressTime, releaseTime, triggerProbe, triggerResponse = presentResponse(loadType, dialType, targetColors, portBioSemi, tracker, triggerSend, trialType)
 
             # Feedback presentation
             reportOri, targetOri, difference, performance = presentTrialFeedback(count, clockwise, dialType)
