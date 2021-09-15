@@ -275,8 +275,8 @@ def presentStim(triggerSend, trialType, loadType, dialType, portBioSemi = None, 
     if dialType == 0: dialAdd = 0
     elif dialType == 1: dialAdd = 100
 
-    triggerEnc1 = trialType + loadAdd + dialAdd + 0
-    triggerEnc2 = trialType + loadAdd + dialAdd + 10
+    triggerEnc1 = trialType + 1 + loadAdd + dialAdd + 0
+    triggerEnc2 = trialType + 1 + loadAdd + dialAdd + 10
 
     fixCross.lineColor = fixColor   
     fixCross.setAutoDraw(True)
@@ -334,7 +334,7 @@ def presentResponse(loadType, dialType, targetColors, trialType = 0, portBioSemi
     if dialType == 0: dialAdd = 0
     elif dialType == 1: dialAdd = 100
 
-    triggerProbe = trialType + loadAdd + dialAdd + 20
+    triggerProbe = trialType + 1 + loadAdd + dialAdd + 20
 
     if triggerSend == True:
         mywin.callOnFlip(portBioSemi.setData, triggerProbe)
@@ -377,7 +377,7 @@ def presentResponse(loadType, dialType, targetColors, trialType = 0, portBioSemi
         pressTime = time.time()
         clockwise = False
 
-        triggerResponse = trialType + loadAdd + dialAdd + 30
+        triggerResponse = trialType + 1 + loadAdd + dialAdd + 30
         if triggerSend == True:
             portBioSemi.setData(triggerResponse) #count 1
             tracker.send_message('trig' + str(triggerResponse))
@@ -400,7 +400,7 @@ def presentResponse(loadType, dialType, targetColors, trialType = 0, portBioSemi
         pressTime = time.time()
         clockwise = True
 
-        triggerResponse = trialType + loadAdd + dialAdd + 40
+        triggerResponse = trialType + 1 + loadAdd + dialAdd + 40
         if triggerSend == True:
             portBioSemi.setData(triggerResponse) #count 1
             tracker.send_message('trig' + str(triggerResponse))

@@ -19,14 +19,14 @@ if setting == 'laptop':
 
 elif setting == 'lab':
     # Monitor
-    monitorHZ = 140
-    monitorSize = [1536,960]
-    height = 35; distance = 90; vertResolution = 1920 
+    monitorHZ = 239
+    monitorSize = [1920,1080]
+    height = 28; distance = 70; vertResolution = 1920 
     triggerSend = True
     resetTrigger = 0
 
-    dataDirectory = []
-    eyeDirectory = []
+    dataDirectory = r'C:\Users\memticipation\Desktop\LABSSRV-DATA\_memticipationLabData\Rose\rn3-sequential-encoding\logfiles'
+    eyeDirectory = r'C:\Users\memticipation\Desktop\LABSSRV-DATA\_memticipationLabData\Rose\rn3-sequential-encoding\eyedata'
 
 deg_per_px = degrees(atan2(.5*height, distance)) / (.5*vertResolution) # Calculate the number of degrees that correspond to a single pixel
 
