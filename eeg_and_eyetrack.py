@@ -26,6 +26,8 @@ def eyeTrackerStart(tracker):
     tracker.start_recording()
 
 def eyeTrackerStop(tracker):
+    os.chdir(eyeDirectory)
+
     tracker.stop_recording()
     tracker.transfer_edf()
     tracker.close_edf()
