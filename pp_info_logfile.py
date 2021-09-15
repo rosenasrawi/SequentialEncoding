@@ -15,7 +15,7 @@ def createNewDatafile(session, subjectID):
     now = datetime.now()
     now = now.strftime('%m%d%Y_%H%M%S')
 
-    filename = 'rn1_s' + subjectID + session + '_' + now + '.csv'
+    filename = 'rn3_s' + subjectID + session + '_' + now + '.csv'
 
     with open(filename, mode = 'w') as datafile:
 

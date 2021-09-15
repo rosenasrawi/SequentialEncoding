@@ -13,7 +13,7 @@ def activateEEGandEyeTracker(subjectID, session):
 
     # Eye-tracker
     tracker = eyelinker.EyeLinker(window = mywin, 
-                                    filename = 'rn1_' + subjectID + session + '.edf',
+                                    filename = 'rn3_' + subjectID + session + '.edf',
                                     eye = 'BOTH')
 
     return portBioSemi, tracker
