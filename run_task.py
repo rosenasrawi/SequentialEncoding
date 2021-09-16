@@ -28,7 +28,7 @@ thisNumBlock = 0
 random.shuffle(dialTypesTask)           # Random order dial up & right
 
 for dial in range(len(dialTypesTask)):
-    #eyetrackingCalibration(triggerSend, portBioSemi, tracker)
+    eyetrackingCalibration(triggerSend, portBioSemi, tracker)
 
     dialType = dialTypesTask[dial]
     presentPrecueDial(dialType, targetColors = [])
@@ -107,5 +107,5 @@ for dial in range(len(dialTypesTask)):
 
 if triggerSend == True:
     eyeTrackerStop(tracker)
-    
+
 presentTaskFinished()

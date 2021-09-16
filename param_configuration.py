@@ -107,10 +107,11 @@ loadTypesPractice   = [0,1] # per dial type
 trialTypesPractice  = trialTypes * 2 # per load
 
 # Task blocks
-#dialTypesTask   = [0,1,0,1,0,1]
-#loadTypesTask   = [0,1] # per dial type 
-#trialTypesTask  = trialTypes * 4 # per load
-
-dialTypesTask   = [0,1]
+dialTypesTask   = [0,1,0,1,0,1]
 loadTypesTask   = [0,1] # per dial type 
-trialTypesTask  = trialTypes # per load
+trialTypesTask  = trialTypes * 4 # per load
+
+# If want to tryout short task
+#dialTypesTask   = [0,1]
+#loadTypesTask   = [0,1] # per dial type 
+#trialTypesTask  = trialTypes # per load

@@ -234,15 +234,8 @@ def presentPrecueLoad(targetColors, load):
 
 def eyetrackingCalibration(triggerSend, portBioSemi = None, tracker = None):
 
-    # Please follow the dot
+    # Please follow the dot in 3, 2, 1:
     eyecalibrationText.setAutoDraw(True)
-
-    #for i in range(delayTime): # 1750 ms
-    #    mywin.flip()
-
-    #eyecalibrationText.setAutoDraw(False)
-
-    # In 3, 2, 1:
     eyecalibrationCounterText.setAutoDraw(True)
 
     eyecalibrationCounterText.text = '3'
@@ -268,7 +261,7 @@ def eyetrackingCalibration(triggerSend, portBioSemi = None, tracker = None):
     eyecalibrationCounterText.text = ''
     for i in range(encodingTime*2): # 500 ms
         mywin.flip()
-        
+
     eyecalibrationText.setAutoDraw(False)
     eyecalibrationCounterText.setAutoDraw(False)
 
