@@ -18,6 +18,10 @@ mywin = visual.Window(
 
 kb = keyboard.Keyboard()
 
+mouse = visual.CustomMouse(
+    win = mywin,
+    visible = False)
+
 """ Objects """
 
 fixCross = visual.ShapeStim(
@@ -95,9 +99,7 @@ eyecalibrationCircle = visual.Circle(
     edges = circleEdges,
     lineWidth = LineWidth,
     lineColor = fixColor,
-    fillColor = fixColor
-    #pos = determined later
-)
+    fillColor = fixColor)
 
 eyecalibrationCircleMini = visual.Circle(
     win = mywin,
@@ -105,9 +107,7 @@ eyecalibrationCircleMini = visual.Circle(
     edges = circleEdges,
     lineWidth = LineWidth,
     lineColor = eyeCalibMini,
-    fillColor = eyeCalibMini
-    #pos = determined later
-)
+    fillColor = eyeCalibMini)
 
 """ Text """
 
@@ -167,7 +167,7 @@ practiceDialText = visual.TextStim(
 practiceDialButtons = visual.TextStim(
     win = mywin, 
     font = textFont,
-    text = "Press and hold: \n \n \n [Z] to turn counterclockwise \n \n [M] to turn clockwise",
+    text = "Press and hold: \n \n \n [Z] to turn counterclockwise \n [M] to turn clockwise",
     color = fontColor,
     pos = [0,-barSize[1]],
     height = fontSizePreCue)
@@ -212,10 +212,18 @@ eyecalibrationCounterText = visual.TextStim(
     pos = [0,-barSize[0]],
     height = fontSizePreCue)
 
+taskStartText = visual.TextStim(
+    win = mywin, 
+    font = textFont,
+    text = 'Press [space] to start this task session',
+    color = fontColor,
+    pos = [0,0],
+    height = fontSizePreCue) 
+
 taskFinishedText = visual.TextStim(
     win = mywin, 
     font = textFont,
-    text = 'You have now completed this session, thank you! \n \n Press [space] to close this window',
+    text = 'You have now completed this task session, thank you! \n \n Press [space] to close this window',
     color = fontColor,
     pos = [0,0],
     height = fontSizePreCue)

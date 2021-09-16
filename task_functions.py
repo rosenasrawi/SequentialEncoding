@@ -523,6 +523,10 @@ def presentBlockFeedback(performanceBlock, numBlocks, thisNumBlock):
     mywin.flip()
     event.waitKeys(keyList = 'space')    
 
+def presentTaskStart():
+    taskStartText.draw()
+    mywin.flip()
+    event.waitKeys(keyList = 'space')       
 
 def presentTaskFinished():
     taskFinishedText.draw()

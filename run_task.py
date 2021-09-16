@@ -27,6 +27,8 @@ thisNumBlock = 0
 
 random.shuffle(dialTypesTask)           # Random order dial up & right
 
+presentTaskStart()
+
 for dial in range(len(dialTypesTask)):
     eyetrackingCalibration(triggerSend, portBioSemi, tracker)
 
