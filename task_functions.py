@@ -25,10 +25,10 @@ def turnPositionsCircle(turnUpperPos, turnLowerPos, thisTurn):
 
 def determineBlockSpecifics(load):
 
-    nonTargetColors = barColors.copy() # Copy barcolors so I we remove the targets
+    nonTargetColors = barColors.copy()              # Copy barcolors so I we remove the targets
     
     if load == 0: # load one
-        targetColors = random.choice(barColors)     # Pick on color
+        targetColors = random.choice(barColors)     # Pick one color
         nonTargetColors.remove(targetColors)        # All other colors are non-targets
 
     elif load == 1: # load two
@@ -36,7 +36,6 @@ def determineBlockSpecifics(load):
         nonTargetColors.remove(targetColors[0])     # The other two are non-targets
         nonTargetColors.remove(targetColors[1])
     
-    #random.shuffle(trialTypes)                      # Trialtypes shuffled for each block
     return targetColors, nonTargetColors
 
 """ Trial specifics"""
@@ -239,27 +238,27 @@ def eyetrackingCalibration(triggerSend, portBioSemi = None, tracker = None):
     eyecalibrationCounterText.setAutoDraw(True)
 
     eyecalibrationCounterText.text = '3'
-    for i in range(encodingTime*2): # 500 ms
+    for i in range(counterTime): # 500 ms
         mywin.flip()
 
     eyecalibrationCounterText.text = ''
-    for i in range(encodingTime*2): # 500 ms
+    for i in range(counterTime): # 500 ms
         mywin.flip()
 
     eyecalibrationCounterText.text = '2'
-    for i in range(encodingTime*2): # 500 ms
+    for i in range(counterTime): # 500 ms
         mywin.flip()
 
     eyecalibrationCounterText.text = ''
-    for i in range(encodingTime*2): # 500 ms
+    for i in range(counterTime): # 500 ms
         mywin.flip()
 
     eyecalibrationCounterText.text = '1'
-    for i in range(encodingTime*2): # 500 ms
+    for i in range(counterTime): # 500 ms
         mywin.flip()    
 
     eyecalibrationCounterText.text = ''
-    for i in range(encodingTime*2): # 500 ms
+    for i in range(counterTime): # 500 ms
         mywin.flip()
 
     eyecalibrationText.setAutoDraw(False)

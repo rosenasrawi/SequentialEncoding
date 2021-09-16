@@ -36,7 +36,7 @@ elif setting == 'lab':
 deg_per_px = degrees(atan2(.5*height, distance)) / (.5*vertResolution) # Calculate the number of degrees that correspond to a single pixel
 
 # Sizes
-barSize = [int(0.4/deg_per_px), int(3/deg_per_px)] # width, height      # 
+barSize = [int(0.4/deg_per_px), int(3/deg_per_px)] # width, height 
 fixSize = int(0.2/deg_per_px); LineWidth = int(0.05/deg_per_px)
 
 circleRadius = int(1.5/deg_per_px)
@@ -75,6 +75,7 @@ encodingTime = int(monitorHZ/4)                     # 250 ms
 betweenTime = int(monitorHZ*0.75)                   # 750 ms
 delayTime = int(monitorHZ*1.75)                     # 1750 ms
 feedbackTime = int(monitorHZ/4)                     # 250 ms
+counterTime = int(monitorHZ/2)                      # 500 ms
 calibrationTime = int(monitorHZ*1.5)                # 1500
 
 # Colors
@@ -83,9 +84,6 @@ barColors = ["#C2A025", "#3843C2", "#2FC259", "#CF3C3C"]    # orange, blue, gree
 barColorNames = ['YELLOW', 'BLUE', 'GREEN', 'RED']       
 fixColor = (300/510,300/510,300/510)                        # lightgrey
 eyeCalibMini = (1/510, 1/510, 1/510)
-
-# Dials
-dialNames = ["upper", "right"]
 
 # Text
 textFont = 'Helvetica'
