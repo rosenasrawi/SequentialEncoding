@@ -234,13 +234,45 @@ def presentPrecueLoad(targetColors, load):
 
 def eyetrackingCalibration(triggerSend, portBioSemi = None, tracker = None):
 
+    # Please follow the dot
     eyecalibrationText.setAutoDraw(True)
 
-    for i in range(delayTime): # 1750 ms
+    #for i in range(delayTime): # 1750 ms
+    #    mywin.flip()
+
+    #eyecalibrationText.setAutoDraw(False)
+
+    # In 3, 2, 1:
+    eyecalibrationCounterText.setAutoDraw(True)
+
+    eyecalibrationCounterText.text = '3'
+    for i in range(encodingTime*2): # 500 ms
         mywin.flip()
 
-    eyecalibrationText.setAutoDraw(False)
+    eyecalibrationCounterText.text = ''
+    for i in range(encodingTime*2): # 500 ms
+        mywin.flip()
 
+    eyecalibrationCounterText.text = '2'
+    for i in range(encodingTime*2): # 500 ms
+        mywin.flip()
+
+    eyecalibrationCounterText.text = ''
+    for i in range(encodingTime*2): # 500 ms
+        mywin.flip()
+
+    eyecalibrationCounterText.text = '1'
+    for i in range(encodingTime*2): # 500 ms
+        mywin.flip()    
+
+    eyecalibrationCounterText.text = ''
+    for i in range(encodingTime*2): # 500 ms
+        mywin.flip()
+        
+    eyecalibrationText.setAutoDraw(False)
+    eyecalibrationCounterText.setAutoDraw(False)
+
+    # Dots start to appear
     eyecalibrationCircle.setAutoDraw(True)
     eyecalibrationCircleMini.setAutoDraw(True)
 
@@ -496,5 +528,11 @@ def presentBlockFeedback(performanceBlock, numBlocks, thisNumBlock):
     blockFeedbackPerformanceText.draw()
     space2continue.draw()
 
+    mywin.flip()
+    event.waitKeys(keyList = 'space')    
+
+
+def presentTaskFinished():
+    taskFinishedText.draw()
     mywin.flip()
     event.waitKeys(keyList = 'space')    

@@ -65,45 +65,47 @@ for dial in range(len(dialTypesTask)):
                 colCued1 = targetColors[0]; colCued2 = targetColors[1]
 
             # Create trialdata
-            trialData = {'Left bar ori 1':      leftBar1.ori,                 
-                         'Right bar ori 1':     rightBar1.ori,
-                         'Left bar col 1':      leftBar1.lineColor, 
-                         'Right bar col 1':     rightBar1.lineColor,
-                         'Left bar ori 2':      leftBar2.ori,                 
-                         'Right bar ori 2':     rightBar2.ori,
-                         'Left bar col 2':      leftBar2.lineColor, 
-                         'Right bar col 2':     rightBar2.lineColor,
-                         'Col cued 1':          colCued1, 
-                         'Col cued 2':          colCued2,                     # only if load 2
-                         'Col probed':          colCued1,
-                         'Target moment':       targetMoment,
-                         'Target location':     targetLocation,
-                         'Target tilt':         targetTilt,
-                         'Ask degree':          targetOri,
-                         'Rep degree':          reportOri,
-                         'Circle steps':        count, 
-                         'Clockwise':           clockwise,
-                         'Difference':          difference, 
-                         'Fixation time':       thisFixTime, 
-                         'Probe start time':    probeTime,
-                         'Press start time':    pressTime, 
-                         'Release start time':  releaseTime, 
-                         'Decision time':       pressTime - probeTime, 
-                         'Response duration':   releaseTime - pressTime,
-                         'Performance':         performance, 
-                         'Dial type':           dialType, 
-                         'Load type':           loadType, 
-                         'Trial type':          trialType,
-                         'Task type':           session,
-                         'Trigger encoding 1':  triggerEnc1,
-                         'Trigger encoding 2':  triggerEnc2,
-                         'Trigger probe':       triggerProbe,
-                         'Trigger response':    triggerResponse}
+            trialData = {'leftBarOri1':         leftBar1.ori,                 
+                         'rightBarOri1':        rightBar1.ori,
+                         'leftBarCol1':         leftBar1.lineColor, 
+                         'rightBarCol1':        rightBar1.lineColor,
+                         'leftBarOri2':         leftBar2.ori,                 
+                         'rightBarOri2':        rightBar2.ori,
+                         'leftBarCol2':         leftBar2.lineColor, 
+                         'rightBarCol2':        rightBar2.lineColor,
+                         'colCued1':            colCued1, 
+                         'colCued2':            colCued2,                     # only if load 2
+                         'colProbed':           colCued1,
+                         'targetMoment':        targetMoment,
+                         'targetLocation':      targetLocation,
+                         'targetTilt':          targetTilt,
+                         'askDegree':           targetOri,
+                         'repDegree':           reportOri,
+                         'circleSteps':         count, 
+                         'clockwise':           clockwise,
+                         'difference':          difference, 
+                         'fixationTime':        thisFixTime, 
+                         'probeTime':           probeTime,
+                         'pressTime':           pressTime, 
+                         'releaseTime':         releaseTime, 
+                         'responseTime':        pressTime - probeTime, 
+                         'responseDuration':    releaseTime - pressTime,
+                         'performance':         performance, 
+                         'dialType':            dialType, 
+                         'loadType':            loadType, 
+                         'trialType':           trialType,
+                         'taskType':            session,
+                         'triggerEncoding1':    triggerEnc1,
+                         'triggerEncoding2':    triggerEnc2,
+                         'triggerProbe':        triggerProbe,
+                         'triggerResponse':     triggerResponse}
 
             # Add trial data to logfile
             addTrialToData(filename, header, trialData) 
 
         presentBlockFeedback(performanceBlock, numBlocks, thisNumBlock) # show block feedback
 
-    if triggerSend == True:
-        eyeTrackerStop(tracker)
+if triggerSend == True:
+    eyeTrackerStop(tracker)
+    
+presentTaskFinished()

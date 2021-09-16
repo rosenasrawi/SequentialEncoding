@@ -17,7 +17,7 @@ thisNumBlock = 0
 random.shuffle(dialTypesPractice)           # Random order dial up & right
 
 for dial in range(len(dialTypesPractice)):
-    #eyetrackingCalibration(triggerSend)
+    eyetrackingCalibration(triggerSend)
 
     dialType = dialTypesPractice[dial]
     presentPrecueDial(dialType, targetColors = [])
@@ -37,7 +37,7 @@ for dial in range(len(dialTypesPractice)):
         for trial in range(len(trialTypesPractice)):
             trialType = trialTypesPractice[trial]
             targetColors, nonTargetColors, targetMoment, targetLocation, targetTilt = determineTrialSpecifics(trialType, loadType, targetColors, nonTargetColors)
-            presentStim(triggerSend, trialType, loadType, dialType, portBioSemi, tracker)
+            #presentStim(triggerSend, trialType, loadType, dialType, portBioSemi, tracker)
             
             clockwise, count, probeTime, pressTime, releaseTime, triggerProbe, triggerResponse = presentResponse(loadType, dialType, targetColors, portBioSemi, tracker, triggerSend)
             reportOri, targetOri, difference, performance = presentTrialFeedback(count, clockwise, dialType)
@@ -45,3 +45,5 @@ for dial in range(len(dialTypesPractice)):
             performanceBlock.append(performance)
 
         presentBlockFeedback(performanceBlock, numBlocks, thisNumBlock) # show block feedback
+
+presentTaskFinished()

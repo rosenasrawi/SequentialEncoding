@@ -4,17 +4,23 @@ from math import pi, atan2, degrees
 import itertools
 
 """ Configuration script """
-setting = 'lab'
+setting = 'home'
+screen = 'laptop'
 
-if setting == 'laptop':
-    # Monitor
-    monitorHZ = 60
-    monitorSize = [1536,960]
-    height = 22; distance = 50; vertResolution = 1536 
+if setting == 'home':
     triggerSend = False
 
     # Directories
     dataDirectory = '/Users/rosenasrawi/Documents/VU PhD/Projects/rn3 - Sequential encoding/Data/Try-out'
+
+    if screen == 'laptop':
+        monitorHZ = 60
+        monitorSize = [1536,960]
+        height = 22; distance = 50; vertResolution = 1536 
+    elif screen == 'monitor':
+        monitorHZ = 60
+        monitorSize = [2560,1440]
+        height = 35; distance = 70; vertResolution = 2560 
 
 elif setting == 'lab':
     # Monitor
