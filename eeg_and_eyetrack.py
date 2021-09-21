@@ -25,6 +25,12 @@ def eyeTrackerStart(tracker):
     tracker.initialize_tracker()
     tracker.start_recording()
 
+def eyeTrackerCalibrate(tracker):
+    tracker.stop_recording()
+    tracker.display_eyetracking_instructions()
+    tracker.calibrate()
+    tracker.start_recording()
+
 def eyeTrackerStop(tracker):
     os.chdir(eyeDirectory)
 
