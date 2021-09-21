@@ -4,7 +4,7 @@ from math import pi, atan2, degrees
 import itertools
 
 """ Configuration script """
-setting = 'home'
+setting = 'lab'
 screen = 'laptop'
 
 if setting == 'home':
@@ -102,14 +102,14 @@ trialTypes = [0,1,2,3,4,5,6,7]
 # Practice blocks
 dialTypesPractice   = [0,1]
 loadTypesPractice   = [0,1] # per dial type 
-trialTypesPractice  = trialTypes * 2 # per load
+trialTypesPractice  = trialTypes # per load
 
 # Task blocks
-dialTypesTask   = [0,1,0,1,0,1]
-loadTypesTask   = [0,1] # per dial type 
-trialTypesTask  = trialTypes * 4 # per load
+#dialTypesTask   = [0,1,0,1,0,1]
+#loadTypesTask   = [0,1] # per dial type 
+#trialTypesTask  = trialTypes * 4 # per load
 
 # If want to tryout short task
-#dialTypesTask   = [0,1]
-#loadTypesTask   = [0,1] # per dial type 
-#trialTypesTask  = trialTypes # per load
+dialTypesTask   = [0,1]
+loadTypesTask   = [0,1] # per dial type 
+trialTypesTask  = trialTypes # per load

@@ -22,6 +22,7 @@ elif triggerSend == False:
     portBioSemi = []; tracker = []
 
 """ Run Task """
+
 numBlocks = len(dialTypesTask) * len(loadTypesTask)
 thisNumBlock = 0
 
