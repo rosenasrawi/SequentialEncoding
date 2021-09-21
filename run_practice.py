@@ -19,7 +19,6 @@ random.shuffle(dialTypesPractice)           # Random order dial up & right
 presentTaskStart()
 
 for dial in range(len(dialTypesPractice)):
-    eyetrackingCalibration(triggerSend)
 
     dialType = dialTypesPractice[dial]
     presentPrecueDial(dialType, targetColors = [])
