@@ -192,9 +192,9 @@ class ConnectedEyeLinker:
 
         self.send_command('elcl_select_configuration = %s' % settings['elcl_configuration'])
 
-        pl.setCalibrationColors(settings['foreground_color'], settings['background_color'])
-        pl.setCalibrationSounds(
-            settings['target_sound'], settings['good_sound'], settings['error_sound'])
+        #pl.setCalibrationColors(settings['foreground_color'], settings['background_color'])
+        #pl.setCalibrationSounds(
+        #    settings['target_sound'], settings['good_sound'], settings['error_sound'])
 
         if self.eye in ('LEFT', 'RIGHT'):
             self.send_command('active_eye = %s' % self.eye)
@@ -271,16 +271,16 @@ class ConnectedEyeLinker:
 
         psychopy.visual.TextStim(
             self.window, text='Sometimes a target that looks like this will appear.',
-            color=self.text_color, units='norm', pos=(0, 0.22), height=0.1
+            color=self.text_color, units='norm', pos=(0, 0.22), height=0.08
         ).draw()
 
         psychopy.visual.TextStim(
-            self.window, color=self.text_color, units='norm', pos=(0, -0.18), height=0.1,
+            self.window, color=self.text_color, units='norm', pos=(0, -0.18), height=0.07,
             text='We use it to calibrate the eye tracker. Stare at it whenever you see it.'
         ).draw()
 
         psychopy.visual.TextStim(
-            self.window, color=self.text_color, units='norm', pos=(0, -0.28), height=0.1,
+            self.window, color=self.text_color, units='norm', pos=(0, -0.28), height=0.07,
             text='Press any key to continue.'
         ).draw()
 
@@ -301,7 +301,7 @@ class ConnectedEyeLinker:
             )
 
         psychopy.visual.TextStim(
-            self.window, text=text, pos=(0, 0), height=0.1, units='norm', color=self.text_color
+            self.window, text=text, pos=(0, 0), height=0.07, units='norm', color=self.text_color
         ).draw()
 
         self.window.flip()
