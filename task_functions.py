@@ -52,56 +52,56 @@ def determineTrialSpecifics(trial, load, targetColors, nonTargetColors):
     
     if load == 0: # load one
 
-        if targetMoment == 0 and targetLocation == 0:       # encoding one, left
-            leftBar1.fillColor = targetColors # target
-            rightBar1.fillColor = nonTargetColors[0] # divide other three 
-            leftBar2.fillColor = nonTargetColors[1]
-            rightBar2.fillColor = nonTargetColors[2]
+        if targetMoment == 0 and targetLocation == 0:                       # encoding one, left
+            leftBar1.name = leftBar1.fillColor = targetColors               # target
+            rightBar1.name = rightBar1.fillColor = nonTargetColors[0]       # divide other three 
+            leftBar2.name = leftBar2.fillColor = nonTargetColors[1]
+            rightBar2.name = rightBar2.fillColor = nonTargetColors[2]
 
-        elif targetMoment == 0 and targetLocation == 1:     # encoding one, right
-            leftBar1.fillColor = nonTargetColors[0]
-            rightBar1.fillColor = targetColors # target
-            leftBar2.fillColor = nonTargetColors[1]
-            rightBar2.fillColor = nonTargetColors[2]   
+        elif targetMoment == 0 and targetLocation == 1:                     # encoding one, right
+            leftBar1.name = leftBar1.fillColor = nonTargetColors[0]
+            rightBar1.name = rightBar1.fillColor = targetColors             # target
+            leftBar2.name = leftBar2.fillColor = nonTargetColors[1]
+            rightBar2.name = rightBar2.fillColor = nonTargetColors[2]   
 
-        elif targetMoment == 1 and targetLocation == 0:     # encoding two, left
-            leftBar1.fillColor = nonTargetColors[0]
-            rightBar1.fillColor = nonTargetColors[1]
-            leftBar2.fillColor = targetColors # target
-            rightBar2.fillColor = nonTargetColors[2]
+        elif targetMoment == 1 and targetLocation == 0:                     # encoding two, left
+            leftBar1.name = leftBar1.fillColor = nonTargetColors[0]
+            rightBar1.name = rightBar1.fillColor = nonTargetColors[1]
+            leftBar2.name = leftBar2.fillColor = targetColors # target
+            rightBar2.name = rightBar2.fillColor = nonTargetColors[2]
 
-        elif targetMoment == 1 and targetLocation == 1:     # encoding two, right
-            leftBar1.fillColor = nonTargetColors[0]
-            rightBar1.fillColor = nonTargetColors[1]
-            leftBar2.fillColor = nonTargetColors[2]
-            rightBar2.fillColor = targetColors # target
+        elif targetMoment == 1 and targetLocation == 1:                     # encoding two, right
+            leftBar1.name = leftBar1.fillColor = nonTargetColors[0]
+            rightBar1.name = rightBar1.fillColor = nonTargetColors[1]
+            leftBar2.name = leftBar2.fillColor = nonTargetColors[2]
+            rightBar2.name = rightBar2.fillColor = targetColors             # target
 
     if load == 1: # load two
-        random.shuffle(targetColors)                        # shuffle them, 0 = the target
+        random.shuffle(targetColors)                                        # shuffle them, 0 = the target
 
-        if targetMoment == 0 and targetLocation == 0:       # encoding one, left
-            leftBar1.fillColor = targetColors[0] # target
-            rightBar1.fillColor = nonTargetColors[0]
-            leftBar2.fillColor = nonTargetColors[1]
-            rightBar2.fillColor = targetColors[1] # other
+        if targetMoment == 0 and targetLocation == 0:                       # encoding one, left
+            leftBar1.name = leftBar1.fillColor = targetColors[0]            # target
+            rightBar1.name = rightBar1.fillColor = nonTargetColors[0]
+            leftBar2.name = leftBar2.fillColor = nonTargetColors[1]
+            rightBar2.name = rightBar2.fillColor = targetColors[1]          # other
 
-        elif targetMoment == 0 and targetLocation == 1:     # encoding one, right
-            leftBar1.fillColor = nonTargetColors[0]
-            rightBar1.fillColor = targetColors[0] # target
-            leftBar2.fillColor = targetColors[1] # other
-            rightBar2.fillColor = nonTargetColors[1]   
+        elif targetMoment == 0 and targetLocation == 1:                     # encoding one, right
+            leftBar1.name = leftBar1.fillColor = nonTargetColors[0]
+            rightBar1.name = rightBar1.fillColor = targetColors[0]          # target
+            leftBar2.name = leftBar2.fillColor = targetColors[1]            # other
+            rightBar2.name = rightBar2.fillColor = nonTargetColors[1]   
 
-        elif targetMoment == 1 and targetLocation == 0:     # encoding two, left
-            leftBar1.fillColor = nonTargetColors[0]
-            rightBar1.fillColor = targetColors[1] # other
-            leftBar2.fillColor = targetColors[0] # target
-            rightBar2.fillColor = nonTargetColors[1]
+        elif targetMoment == 1 and targetLocation == 0:                     # encoding two, left
+            leftBar1.name = leftBar1.fillColor = nonTargetColors[0]
+            rightBar1.name = rightBar1.fillColor = targetColors[1]          # other
+            leftBar2.name = leftBar2.fillColor = targetColors[0]            # target
+            rightBar2.name = rightBar2.fillColor = nonTargetColors[1]
 
-        elif targetMoment == 1 and targetLocation == 1:     # encoding two, right
-            leftBar1.fillColor = targetColors[1] # other
-            rightBar1.fillColor = nonTargetColors[0]
-            leftBar2.fillColor = nonTargetColors[1]
-            rightBar2.fillColor = targetColors[0] # target
+        elif targetMoment == 1 and targetLocation == 1:                     # encoding two, right
+            leftBar1.name = leftBar1.fillColor = targetColors[1]            # other
+            rightBar1.name = rightBar1.fillColor = nonTargetColors[0]
+            leftBar2.name = leftBar2.fillColor = nonTargetColors[1]
+            rightBar2.name = rightBar2.fillColor = targetColors[0]          # target
 
     # Change all the linecolors accordingly
     leftBar1.lineColor = leftBar1.fillColor
@@ -231,7 +231,7 @@ def presentPrecueLoad(targetColors, load):
 
 """ Eye-tracker calibration """
 
-def eyetrackingCalibration(triggerSend, portBioSemi = None, tracker = None):
+def myTrackCalibration(triggerSend, portBioSemi = None, tracker = None):
 
     # Please follow the dot in 3, 2, 1:
     eyecalibrationText.setAutoDraw(True)

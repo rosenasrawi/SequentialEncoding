@@ -320,7 +320,7 @@ class EyeLink(EyeLinkListener):
 	#
 	#  @param width	Width of the screen.
 	#  @param height Height of he screen.
-	def doTrackerSetup(self,width=None,height=None):
+	def doTrackerSetup(self, width = None, height = None):
 		if width is not None and height is not None:
 			displayCoords = " 0 0 %d %d"%(width,height)
 			self.sendMessage("DISPLAY_COORDS" + displayCoords)
@@ -715,7 +715,7 @@ class EyeLink(EyeLinkListener):
 	#	EYELINK.sendCommand("saccade_velocity_threshold =%d"%(vel));
 	#	\endcode
 	#
-	#  @param vel minimum velocity (°/sec) for saccades.
+	#  @param vel minimum velocity (ï¿½/sec) for saccades.
 	def setSaccadeVelocityThreshold(self, vel):
 		self.sendCommand("saccade_velocity_threshold =%d"%(vel))
 
@@ -728,7 +728,7 @@ class EyeLink(EyeLinkListener):
 	#	EYELINK.sendCommand("saccade_acceleration_threshold  =%d"%(accl));
 	#	\endcode
 	#
-	#  @param accel minimum acceleration (°/sec/sec) for saccades.
+	#  @param accel minimum acceleration (ï¿½/sec/sec) for saccades.
 	def setAccelerationThreshold(self, accel):
 		self.sendCommand("saccade_acceleration_threshold  =%d"%(accel))
 	
@@ -753,7 +753,7 @@ class EyeLink(EyeLinkListener):
 	#	EYELINK.sendCommand("saccade_pursuit_fixup =  %d"%(v));
 	#	\endcode
 	#
-	#  @param maxvel maximum pursuit velocity fixup (°/sec).
+	#  @param maxvel maximum pursuit velocity fixup (ï¿½/sec).
 	def setPursuitFixup(self,maxvel):
 		self.sendCommand("saccade_pursuit_fixup =  %d"%(maxvel))
 		

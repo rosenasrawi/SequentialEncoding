@@ -193,8 +193,8 @@ class ConnectedEyeLinker:
         self.send_command('elcl_select_configuration = %s' % settings['elcl_configuration'])
 
         #pl.setCalibrationColors(settings['foreground_color'], settings['background_color'])
-        #pl.setCalibrationSounds(
-        #    settings['target_sound'], settings['good_sound'], settings['error_sound'])
+        pl.setCalibrationSounds(
+            settings['target_sound'], settings['good_sound'], settings['error_sound'])
 
         if self.eye in ('LEFT', 'RIGHT'):
             self.send_command('active_eye = %s' % self.eye)
@@ -288,7 +288,7 @@ class ConnectedEyeLinker:
         psychopy.event.waitKeys()
         self.window.flip()
 
-    def calibrate(self, text=None):
+    def calibrate(self, width = None, height = None, text = None):
         """Like setup_tracker, but gives the experimenter the option to skip.
         Parameters:
         text -- A string containing the text to display to the experimenter
@@ -306,7 +306,7 @@ class ConnectedEyeLinker:
 
         self.window.flip()
         keys = psychopy.event.waitKeys(keyList=['escape', 'space'])
-        self.tracker.doTrackerSetup()
+        self.tracker.doTrackerSetup(width, height)
         
 
         #self.window.flip()

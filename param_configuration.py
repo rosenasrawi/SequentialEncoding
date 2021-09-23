@@ -4,8 +4,8 @@ from math import pi, atan2, degrees
 import itertools
 
 """ Configuration script """
-setting = 'lab'
-screen = 'laptop'
+setting = 'home'
+screen = 'monitor'
 
 if setting == 'home':
     triggerSend = False
@@ -63,7 +63,7 @@ right_turnLower = [-circleRadius, 0]
 
 # Eye calibration locations
 
-xPositions = [-barSize[1]*2, 0, barSize[1]*2]
+xPositions = [-barSize[1], 0, barSize[1]]
 yPositions = [barSize[1], 0, -barSize[1]]
 
 allPositions = list(itertools.product(xPositions, yPositions)) # 9 times x,y coordinates

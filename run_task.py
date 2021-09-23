@@ -17,7 +17,7 @@ from task_functions import *
 if triggerSend == True:
     from eeg_and_eyetrack import *
     portBioSemi, tracker = activateEEGandEyeTracker(subjectID, session)
-    eyeTrackerStart(tracker)
+    eyelinkStart(tracker)
 elif triggerSend == False:
     portBioSemi = []; tracker = []
 
@@ -32,8 +32,10 @@ presentTaskStart()
 
 for dial in range(len(dialTypesTask)):
     
+    myTrackCalibration(triggerSend, portBioSemi, tracker)
+
     if triggerSend == True:    
-        eyeTrackerCalibrate(tracker)
+        eyelinkCalibrate(tracker)
 
     dialType = dialTypesTask[dial]
     presentPrecueDial(dialType, targetColors = [])
@@ -72,12 +74,12 @@ for dial in range(len(dialTypesTask)):
             # Create trialdata
             trialData = {'leftBarOri1':         leftBar1.ori,                 
                          'rightBarOri1':        rightBar1.ori,
-                         'leftBarCol1':         leftBar1.lineColor, 
-                         'rightBarCol1':        rightBar1.lineColor,
+                         'leftBarCol1':         leftBar1.name, 
+                         'rightBarCol1':        rightBar1.name,
                          'leftBarOri2':         leftBar2.ori,                 
                          'rightBarOri2':        rightBar2.ori,
-                         'leftBarCol2':         leftBar2.lineColor, 
-                         'rightBarCol2':        rightBar2.lineColor,
+                         'leftBarCol2':         leftBar2.name, 
+                         'rightBarCol2':        rightBar2.name,
                          'colCued1':            colCued1, 
                          'colCued2':            colCued2,                     # only if load 2
                          'colProbed':           colCued1,
@@ -111,6 +113,6 @@ for dial in range(len(dialTypesTask)):
         presentBlockFeedback(performanceBlock, numBlocks, thisNumBlock) # show block feedback
 
 if triggerSend == True:
-    eyeTrackerStop(tracker)
+    eyelinkStop(tracker)
 
 presentTaskFinished()

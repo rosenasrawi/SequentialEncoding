@@ -1,7 +1,7 @@
 from psychopy import parallel
 import eyelinker
 
-from param_configuration import resetTrigger, eyeDirectory
+from param_configuration import resetTrigger, eyeDirectory, monitorSize
 from task_objects import mywin
 import os
 
@@ -18,18 +18,18 @@ def activateEEGandEyeTracker(subjectID, session):
 
     return portBioSemi, tracker
 
-def eyeTrackerStart(tracker):
+def eyelinkStart(tracker):
     os.chdir(eyeDirectory)
 
     tracker.open_edf() # open a data file
     tracker.init_tracker()
     tracker.start_recording()
 
-def eyeTrackerCalibrate(tracker):
+def eyelinkCalibrate(tracker):
     tracker.stop_recording()
-    tracker.calibrate()
+    tracker.calibrate(width = monitorSize[0], height = monitorSize[1])
 
-def eyeTrackerStop(tracker):
+def eyelinkStop(tracker):
     os.chdir(eyeDirectory)
 
     tracker.stop_recording()
