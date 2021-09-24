@@ -4,7 +4,7 @@ from math import pi, atan2, degrees
 import itertools
 
 """ Configuration script """
-setting = 'home'
+setting = 'lab'
 screen = 'monitor'
 
 if setting == 'home':

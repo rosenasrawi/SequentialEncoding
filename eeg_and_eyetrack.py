@@ -15,7 +15,7 @@ def activateEEGandEyeTracker(subjectID, session):
     # Eye-tracker
     tracker = eyelinker.EyeLinker(window = mywin, 
                                   filename = 'rn3_' + subjectID + session + '.edf',
-                                  eye = 'RIGHT')
+                                  eye = 'BOTH')
 
     return portBioSemi, tracker
 
@@ -28,9 +28,11 @@ def eyelinkStart(tracker):
 
 def eyelinkCalibrate(tracker):
     tracker.stop_recording()
-    eyecalibrationWaitText.draw()
 
-    event.waitKeys(keyList = 'E')
+    eyecalibrationWaitText.draw()
+    mywin.flip()
+    event.waitKeys(keyList = 'space')
+    
     tracker.start_recording()
     #tracker.calibrate(width = monitorSize[0], height = monitorSize[1])
 
