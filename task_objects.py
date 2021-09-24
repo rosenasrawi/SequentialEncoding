@@ -212,6 +212,14 @@ eyecalibrationCounterText = visual.TextStim(
     pos = [0,-barSize[0]],
     height = fontSizePreCue)
 
+eyecalibrationWaitText = visual.TextStim(
+    win = mywin, 
+    font = textFont,
+    text = 'Please wait for the experimenter to calibrate the eye-tracking equipment',
+    color = fontColor,
+    pos = [0,0],
+    height = fontSizePreCue)
+
 taskStartText = visual.TextStim(
     win = mywin, 
     font = textFont,

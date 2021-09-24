@@ -1,8 +1,9 @@
-from psychopy import parallel
+from psychopy import parallel, event
 import eyelinker
 
-from param_configuration import resetTrigger, eyeDirectory, monitorSize
+from param_configuration import resetTrigger, eyeDirectory
 from task_objects import mywin
+from task_functions import eyecalibrationWaitText
 import os
 
 def activateEEGandEyeTracker(subjectID, session):
@@ -27,7 +28,11 @@ def eyelinkStart(tracker):
 
 def eyelinkCalibrate(tracker):
     tracker.stop_recording()
-    tracker.calibrate(width = monitorSize[0], height = monitorSize[1])
+    eyecalibrationWaitText.draw()
+
+    event.waitKeys(keyList = 'E')
+    tracker.start_recording()
+    #tracker.calibrate(width = monitorSize[0], height = monitorSize[1])
 
 def eyelinkStop(tracker):
     os.chdir(eyeDirectory)
